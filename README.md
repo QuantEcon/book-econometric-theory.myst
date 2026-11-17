@@ -1,6 +1,6 @@
 # A Primer in Econometric Theory: web edition (working draft)
 
-**Read it at <https://quantecon.github.io/book-econometric-theory.mystmd/>.**
+**Read it at <https://quantecon.github.io/book-econometric-theory.myst/>.**
 
 This is a free working draft of John Stachurski, *A Primer in Econometric
 Theory*. The final version is published by

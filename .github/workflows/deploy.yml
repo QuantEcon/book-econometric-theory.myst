@@ -8,9 +8,6 @@ on:
     branches: [main]
   workflow_dispatch:
 
-env:
-  BASE_URL: /${{ github.event.repository.name }}
-
 permissions:
   contents: read
   pages: write
@@ -29,6 +26,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Setup Pages
+        id: pages
         uses: actions/configure-pages@v5
       - uses: actions/setup-node@v4
         with:
@@ -48,6 +46,12 @@ jobs:
           npm install -g /tmp/qe-mystmd/packages/mystmd
           myst --version
       - name: Build HTML
+        # The site's base path, from the Pages settings: the repository path
+        # (/book-econometric-theory.myst) at the github.io address, and empty
+        # once a custom domain serves the site from its root. Hard-coding the
+        # repository path would break every asset and link at a custom domain.
+        env:
+          BASE_URL: ${{ steps.pages.outputs.base_path }}
         run: myst build --html
       - name: Default to the light theme
         # The theme follows the reader's OS colour scheme unless they have

@@ -29,7 +29,7 @@ project:
     url: https://quantecon.org
   # The LaTeX source is private: the GitHub link points at the public repo
   # the site is published from, and there is no edit link.
-  github: https://github.com/QuantEcon/book-econometric-theory.mystmd
+  github: https://github.com/QuantEcon/book-econometric-theory.myst
   edit_url: null
   # The working-draft PDF, built from ../et.tex and copied in by
   # scripts/publish.sh.
@@ -271,10 +271,24 @@ project:
     '\ocirc': '\overset{\circ}{#1}'
 
 site:
-  template: book-theme
+  # QuantEcon's build of the book theme: upstream book-theme 1.4.1 plus a fix
+  # that heads each fact box "Fact" rather than "Property", taking the word
+  # from the `proof:property` entry under `numbering:` above
+  # (QuantEcon/mystmd#149). Pinned to a release: `template: book-theme` takes
+  # upstream's latest at every build, and its next release will not run under
+  # the mystmd this edition pins.
+  template: https://github.com/QuantEcon/myst-theme/releases/download/qe-v1/book-theme.zip
   options:
     style: fancy-lists.css
     # base_url comes from BASE_URL in the deploy workflow
+    # The logo at the top left, from John's cover art: cropped to the drawing,
+    # with the white around it cleared. The dark copy has a light axis and
+    # outlines. It sits in figures/ because publish.sh already copies that
+    # folder; it is not a figure of the book.
+    logo: figures/logo.png
+    logo_dark: figures/logo-dark.png
+    logo_alt: Three overlapping probability densities
+    logo_text: A Primer in Econometric Theory
   parts:
     footer: |
       © John Stachurski. This is a working draft of *A Primer in Econometric
